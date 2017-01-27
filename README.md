@@ -1,2 +1,45 @@
 # dusk
-Use Dusk browser automation without the full Laravel framework 
+Use Dusk browser automation as a standalone component without the full Laravel framework
+
+Full documentation is available at http://duncan3dc.github.io/dusk/  
+PHPDoc API documentation is also available at [http://duncan3dc.github.io/dusk/api/](http://duncan3dc.github.io/dusk/api/namespaces/duncan3dc.Laravel.html)  
+
+[![Build Status](https://travis-ci.org/duncan3dc/dusk.svg?branch=master)](https://travis-ci.org/duncan3dc/dusk)
+[![Latest Stable Version](https://poser.pugx.org/duncan3dc/dusk/version.svg)](https://packagist.org/packages/duncan3dc/dusk)
+
+
+## Installation
+
+The recommended method of installing this library is via [Composer](//getcomposer.org/).
+
+Run the following command from your project root:
+
+```bash
+$ composer require duncan3dc/dusk
+```
+
+
+## Getting Started
+
+```php
+use duncan3dc\Laravel\Dusk;
+
+require __DIR__ . "/vendor/autoload.php";
+
+$dusk = new Dusk;
+
+$dusk->visit("http://example.com");
+echo $dusk->element("h1")->getText() . "\n";
+```
+
+_Read more at http://duncan3dc.github.io/dusk/_  
+
+
+## Changelog
+A [Changelog](CHANGELOG.md) has been available since the beginning of time
+
+
+## Where to get help
+Found a bug? Got a question? Just not sure how something works?  
+Please [create an issue](//github.com/duncan3dc/dusk/issues) and I'll do my best to help out.  
+Alternatively you can catch me on [Twitter](https://twitter.com/duncan3dc)
