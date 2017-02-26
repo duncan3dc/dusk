@@ -3,6 +3,7 @@
 namespace duncan3dc\Laravel;
 
 use Facebook\WebDriver\Remote\RemoteWebElement;
+use Facebook\WebDriver\WebDriverBy;
 use Laravel\Dusk\Concerns\InteractsWithElements;
 use Laravel\Dusk\ElementResolver;
 
@@ -44,5 +45,19 @@ class Element
         }
 
         return $result;
+    }
+
+
+    public function parent($selector = "*")
+    {
+        if ($selector === "*") {
+            $prefix = "parent";
+        } else {
+            $prefix = "ancestor";
+        }
+
+        $selector = preg_replace("/\.([a-zA-Z0-9_-]+)/", "[contains(@class, '$1')]", $selector);
+
+        return $this->findElement(WebDriverBy::xpath("{$prefix}::{$selector}"));
     }
 }

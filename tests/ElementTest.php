@@ -84,4 +84,34 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         $result = $this->element->passthru(".page");
         $this->assertContainsOnlyInstancesOf(Element::class, $result);
     }
+
+
+    public function parentProvider()
+    {
+        $data = [
+            "*"         =>  "parent::*",
+            "div"       =>  "ancestor::div",
+            "div.a"     =>  "ancestor::div[contains(@class, 'a')]",
+            "div.a_b"   =>  "ancestor::div[contains(@class, 'a_b')]",
+            "div.A-Z"   =>  "ancestor::div[contains(@class, 'A-Z')]",
+        ];
+        foreach ($data as $selector => $xpath) {
+            yield [$selector, $xpath];
+        }
+    }
+    /**
+     * @dataProvider parentProvider
+     */
+    public function testParent($selector, $xpath)
+    {
+        $this->remote->shouldReceive("findElement")->with(\Mockery::on(function ($param) use ($xpath) {
+            if ($param->getMechanism() !== "xpath") {
+                return false;
+            }
+            return ($param->getValue() === $xpath);
+        }))->andReturn("parent");
+
+        $result = $this->element->parent($selector);
+        $this->assertSame("parent", $result);
+    }
 }
