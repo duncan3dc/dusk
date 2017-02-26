@@ -4,8 +4,10 @@ namespace duncan3dc\LaravelTests;
 
 use duncan3dc\Laravel\Drivers\DriverInterface;
 use duncan3dc\Laravel\Dusk;
+use duncan3dc\Laravel\Element;
 use duncan3dc\ObjectIntruder\Intruder;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
+use Facebook\WebDriver\Remote\RemoteWebElement;
 use Laravel\Dusk\Browser;
 use Mockery;
 
@@ -64,5 +66,27 @@ class DuskTest extends \PHPUnit_Framework_TestCase
 
         $result = $this->dusk->visit("http://example.com/");
         $this->assertSame($this->dusk, $result);
+    }
+
+
+    public function testProxyElement()
+    {
+        $this->dusk->getBrowser()->shouldReceive("element")->with("#main")->andReturn(Mockery::mock(RemoteWebElement::class));
+
+        $result = $this->dusk->element("#main");
+        $this->assertInstanceOf(Element::class, $result);
+    }
+
+
+    public function testProxyElements()
+    {
+        $this->dusk->getBrowser()->shouldReceive("elements")->with(".page")->andReturn([
+            Mockery::mock(RemoteWebElement::class),
+            Mockery::mock(RemoteWebElement::class),
+            Mockery::mock(RemoteWebElement::class),
+        ]);
+
+        $result = $this->dusk->elements(".page");
+        $this->assertContainsOnlyInstancesOf(Element::class, $result);
     }
 }

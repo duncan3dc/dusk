@@ -5,6 +5,7 @@ namespace duncan3dc\Laravel;
 use duncan3dc\Laravel\Drivers\Chrome;
 use duncan3dc\Laravel\Drivers\DriverInterface;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
+use Facebook\WebDriver\Remote\RemoteWebElement;
 use Laravel\Dusk\Browser;
 
 class Dusk
@@ -44,6 +45,12 @@ class Dusk
 
         if ($result instanceof Browser) {
             return $this;
+        }
+
+        $result = Element::convertElement($result);
+
+        if (is_array($result)) {
+            $result = array_map([Element::class, "convertElement"], $result);
         }
 
         return $result;
