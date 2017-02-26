@@ -55,4 +55,14 @@ class DuskTest extends \PHPUnit_Framework_TestCase
         $result = $this->dusk->passthru("one", "two");
         $this->assertSame("yep", $result);
     }
+
+
+    public function testProxyBrowser()
+    {
+        $browser = $this->dusk->getBrowser();
+        $browser->shouldReceive("visit")->with("http://example.com/")->andReturn($browser);
+
+        $result = $this->dusk->visit("http://example.com/");
+        $this->assertSame($this->dusk, $result);
+    }
 }

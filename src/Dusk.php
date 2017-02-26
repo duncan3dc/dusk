@@ -40,7 +40,13 @@ class Dusk
      */
     public function __call($function, $args)
     {
-        return $this->browser->$function(...$args);
+        $result = $this->browser->$function(...$args);
+
+        if ($result instanceof Browser) {
+            return $this;
+        }
+
+        return $result;
     }
 
 
