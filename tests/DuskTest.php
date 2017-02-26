@@ -89,4 +89,13 @@ class DuskTest extends \PHPUnit_Framework_TestCase
         $result = $this->dusk->elements(".page");
         $this->assertContainsOnlyInstancesOf(Element::class, $result);
     }
+
+
+    public function testScreenshot()
+    {
+        $this->dusk->getDriver()->shouldReceive("takeScreenshot")->with("/tmp/page1.png");
+
+        $result = $this->dusk->screenshot("page1");
+        $this->assertSame($this->dusk, $result);
+    }
 }

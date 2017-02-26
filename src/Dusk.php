@@ -80,6 +80,21 @@ class Dusk
 
 
     /**
+     * Take a screenshot and store it on disk.
+     *
+     * @param string $filename The filename to store (no extension)
+     *
+     * @return $this
+     */
+    public function screenshot($filename)
+    {
+        $this->getDriver()->takeScreenshot("/tmp/{$filename}.png");
+
+        return $this;
+    }
+
+
+    /**
      * Ensure the browser is closed down after use.
      */
     public function __destruct()
