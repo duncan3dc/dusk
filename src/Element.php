@@ -16,6 +16,11 @@ class Element
      */
     private $driver;
 
+    /**
+     * @var ElementResolver $resolver The resolver to use.
+     */
+    private $resolver;
+
 
     public static function convertElement($element)
     {
@@ -48,6 +53,41 @@ class Element
     }
 
 
+    /**
+     * Get all of the elements matching the given selector.
+     *
+     * @param string $selector
+     *
+     * @return Element[]
+     */
+    public function elements($selector)
+    {
+        $elements = $this->resolver->all($selector);
+        return array_map(["self", "convertElement"], $elements);
+    }
+
+
+    /**
+     * Get the element matching the given selector.
+     *
+     * @param string $selector
+     *
+     * @return Element|null
+     */
+    public function element($selector)
+    {
+        $element = $this->resolver->find($selector);
+        return self::convertElement($element);
+    }
+
+
+    /**
+     * Get one of the parents of this element.
+     *
+     * @param string $selector
+     *
+     * @return Element|null
+     */
     public function parent($selector = "*")
     {
         if ($selector === "*") {

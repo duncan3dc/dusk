@@ -82,6 +82,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $result = $this->element->passthru(".page");
+        $this->assertSame(3, count($result));
         $this->assertContainsOnlyInstancesOf(Element::class, $result);
     }
 
@@ -113,5 +114,28 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
         $result = $this->element->parent($selector);
         $this->assertSame("parent", $result);
+    }
+
+
+    public function testElement()
+    {
+        $this->remote->shouldReceive("findElement")->andReturn(Mockery::mock(RemoteWebElement::class));
+
+        $result = $this->element->element("#main");
+        $this->assertInstanceOf(Element::class, $result);
+    }
+
+
+    public function testElements()
+    {
+        $this->remote->shouldReceive("findElements")->andReturn([
+            Mockery::mock(RemoteWebElement::class),
+            Mockery::mock(RemoteWebElement::class),
+            Mockery::mock(RemoteWebElement::class),
+        ]);
+
+        $result = $this->element->elements(".page");
+        $this->assertSame(3, count($result));
+        $this->assertContainsOnlyInstancesOf(Element::class, $result);
     }
 }
