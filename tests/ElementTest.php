@@ -138,4 +138,21 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(3, count($result));
         $this->assertContainsOnlyInstancesOf(Element::class, $result);
     }
+
+
+    public function testClick1()
+    {
+        $this->remote->shouldReceive("click");
+        $result = $this->element->click();
+        $this->assertInstanceOf(Element::class, $result);
+    }
+    public function testClick2()
+    {
+        $remote = Mockery::mock(RemoteWebElement::class);
+        $remote->shouldReceive("click");
+        $this->remote->shouldReceive("findElement")->andReturn($remote);
+
+        $result = $this->element->click("a");
+        $this->assertInstanceOf(Element::class, $result);
+    }
 }

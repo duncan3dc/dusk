@@ -100,4 +100,25 @@ class Element
 
         return $this->findElement(WebDriverBy::xpath("{$prefix}::{$selector}"));
     }
+
+
+    /**
+     * Click the element at the given selector (or this element).
+     *
+     * @param string $selector
+     *
+     * @return $this
+     */
+    public function click($selector = null)
+    {
+        if ($selector === null) {
+            $element = $this->driver;
+        } else {
+            $element = $this->resolver->findOrFail($selector);
+        }
+
+        $element->click();
+
+        return $this;
+    }
 }
