@@ -2,6 +2,7 @@
 
 namespace duncan3dc\Laravel;
 
+use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\RemoteWebElement;
 use Facebook\WebDriver\WebDriverBy;
 use Laravel\Dusk\Concerns\InteractsWithElements;
@@ -12,41 +13,49 @@ class Element
     use InteractsWithElements;
 
     /**
-     * @var RemoteWebElement $driver The element to wrap.
+     * @var RemoteWebElement $remote The element to wrap.
      */
-    private $driver;
+    private $remote;
 
     /**
      * @var ElementResolver $resolver The resolver to use.
      */
     private $resolver;
 
+    /**
+     * @var RemoteWebDriver $driver The parent driver instance.
+     */
+    private $driver;
 
-    public static function convertElement($element)
+
+    public static function convertElement($element, RemoteWebDriver $driver)
     {
         if ($element instanceof RemoteWebElement) {
-            return new self($element);
+            return new self($element, $driver);
         }
 
         return $element;
     }
 
 
-    public function __construct(RemoteWebElement $element)
+    private function __construct(RemoteWebElement $element, RemoteWebDriver $driver)
     {
-        $this->driver = $element;
-        $this->resolver = new ElementResolver($this->driver);
+        $this->remote = $element;
+        $this->resolver = new ElementResolver($this->remote);
+        $this->driver = $driver;
     }
 
 
     public function __call($function, $args)
     {
-        $result = $this->driver->$function(...$args);
+        $result = $this->remote->$function(...$args);
 
-        $result = self::convertElement($result);
+        $result = self::convertElement($result, $this->driver);
 
         if (is_array($result)) {
-            $result = array_map(["self", "convertElement"], $result);
+            array_walk($result, function (&$element) {
+                $element = self::convertElement($element, $this->driver);
+            });
         }
 
         return $result;
@@ -63,7 +72,12 @@ class Element
     public function elements($selector)
     {
         $elements = $this->resolver->all($selector);
-        return array_map(["self", "convertElement"], $elements);
+
+        array_walk($elements, function (&$element) {
+            $element = self::convertElement($element, $this->driver);
+        });
+
+        return $elements;
     }
 
 
@@ -77,7 +91,7 @@ class Element
     public function element($selector)
     {
         $element = $this->resolver->find($selector);
-        return self::convertElement($element);
+        return self::convertElement($element, $this->driver);
     }
 
 
@@ -112,7 +126,7 @@ class Element
     public function click($selector = null)
     {
         if ($selector === null) {
-            $element = $this->driver;
+            $element = $this->remote;
         } else {
             $element = $this->resolver->findOrFail($selector);
         }

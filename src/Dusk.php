@@ -75,10 +75,12 @@ class Dusk
             return $this;
         }
 
-        $result = Element::convertElement($result);
+        $result = Element::convertElement($result, $this->getDriver());
 
         if (is_array($result)) {
-            $result = array_map([Element::class, "convertElement"], $result);
+            array_walk($result, function (&$element) {
+                $element = Element::convertElement($element, $this->getDriver());
+            });
         }
 
         return $result;

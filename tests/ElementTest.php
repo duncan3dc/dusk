@@ -3,19 +3,23 @@
 namespace duncan3dc\LaravelTests;
 
 use duncan3dc\Laravel\Element;
+use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\RemoteWebElement;
 use Mockery;
 
 class ElementTest extends \PHPUnit_Framework_TestCase
 {
     private $remote;
+    private $driver;
     private $element;
 
 
     public function setUp()
     {
         $this->remote = Mockery::mock(RemoteWebElement::class);
-        $this->element = new Element($this->remote);
+        $this->driver = Mockery::mock(RemoteWebDriver::class);
+
+        $this->element = Element::convertElement($this->remote, $this->driver);
     }
 
 
@@ -31,7 +35,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
         $inputs = [
             $this->element,
-            new Element(Mockery::mock(RemoteWebElement::class)),
+            Element::convertElement(Mockery::mock(RemoteWebElement::class), Mockery::mock(RemoteWebDriver::class)),
             false,
             true,
             (object) ["one" => 1],
@@ -45,7 +49,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testConvertElement($input, $wrap)
     {
-        $result = Element::convertElement($input);
+        $result = Element::convertElement($input, $this->driver);
 
         if ($wrap) {
             $this->assertInstanceOf(Element::class, $result);
