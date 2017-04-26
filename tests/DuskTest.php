@@ -137,4 +137,13 @@ class DuskTest extends \PHPUnit_Framework_TestCase
         $result = $this->dusk->screenshot("page1");
         $this->assertSame($this->dusk, $result);
     }
+
+
+    public function testExecuteScript()
+    {
+        $this->dusk->getDriver()->shouldReceive("executeScript")->with("alert('ok')");
+
+        $result = $this->dusk->executeScript("alert('ok')");
+        $this->assertSame($this->dusk, $result);
+    }
 }

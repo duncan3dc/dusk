@@ -167,6 +167,21 @@ class Dusk
 
 
     /**
+     * Run some javascript in the browser.
+     *
+     * @param string $script The javascript to run
+     *
+     * @return $this;
+     */
+    public function executeScript($script)
+    {
+        $this->getDriver()->executeScript($script);
+
+        return $this;
+    }
+
+
+    /**
      * Ensure the browser is closed down after use.
      */
     public function __destruct()
