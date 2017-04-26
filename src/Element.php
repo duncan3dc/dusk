@@ -135,4 +135,25 @@ class Element
 
         return $this;
     }
+
+
+    /**
+     * Move the mouse over the given selector (or this element).
+     *
+     * @param string $selector
+     *
+     * @return $this
+     */
+    public function mouseover($selector = null)
+    {
+        if ($selector === null) {
+            $element = $this->remote;
+        } else {
+            $element = $this->resolver->findOrFail($selector);
+        }
+
+        $this->driver->getMouse()->mouseMove($element->getCoordinates());
+
+        return $this;
+    }
 }

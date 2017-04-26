@@ -5,6 +5,14 @@ Changelog
 
 --------
 
+## 0.4.0 - 2017-07-05
+
+### Added
+
+* [Element] Allow the mouse to move over an element itself using Element::mouseover() with no selector.
+
+--------
+
 ## 0.3.1 - 2017-07-04
 
 ### Fixed
