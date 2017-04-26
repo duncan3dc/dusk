@@ -175,6 +175,12 @@ class Dusk
     }
 
 
+    public function executeScript($script)
+    {
+        return $this->getDriver()->executeScript($script);
+    }
+
+
     /**
      * Run some javascript in the browser.
      *
