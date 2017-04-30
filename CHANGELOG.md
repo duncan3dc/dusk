@@ -5,6 +5,15 @@ Changelog
 
 --------
 
+## 0.2.0 - 2017-04-30
+
+### Added
+
+* [Laravel] Compatibility with version 1.1 of laravel/dusk.
+* [Element] Allow an element itself to be clicked on using Element::click() with no selector.
+
+--------
+
 ## 0.1.1 - 2017-03-04
 
 ### Fixed
