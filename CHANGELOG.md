@@ -5,6 +5,15 @@ Changelog
 
 --------
 
+## 0.3.0 - 2017-06-25
+
+### Added
+
+* [Dusk] Add support for a base url.
+* [Dusk] Allow the executeScript() method of the driver to be called.
+
+--------
+
 ## 0.2.0 - 2017-04-30
 
 ### Added
