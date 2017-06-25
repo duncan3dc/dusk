@@ -17,6 +17,12 @@ class Dusk
 
 
     /**
+     * @var string $baseUrl The base url.
+     */
+    private $baseUrl;
+
+
+    /**
      * Create a new instance.
      *
      * @param DriverInterface $driver The browser driver to use
@@ -28,6 +34,21 @@ class Dusk
         }
 
         $this->browser = new Browser($driver->getDriver());
+    }
+
+
+    /**
+     * Set the base url to use.
+     *
+     * @param string $url The base url
+     *
+     * @return $this
+     */
+    public function setBaseUrl($url)
+    {
+        $this->baseUrl = rtrim($url, "/");
+
+        return $this;
     }
 
 
@@ -76,6 +97,57 @@ class Dusk
     public function getDriver()
     {
         return $this->browser->driver;
+    }
+
+
+    /**
+     * Browse to the given URL.
+     *
+     * @param string $url The URL to visit
+     *
+     * @return $this
+     */
+    public function visit($url)
+    {
+        $url = $this->applyBaseUrl($url);
+
+        $this->getBrowser()->visit($url);
+
+        return $this;
+    }
+
+
+    /**
+     * Ensure the passed url uses the current base.
+     *
+     * @param string $url The URL to convert
+     *
+     * @return string
+     */
+    private function applyBaseUrl($url)
+    {
+        if ($this->baseUrl === null) {
+            return $url;
+        }
+
+        if (substr($url, 0, 7) === "http://") {
+            return $url;
+        }
+
+        if (substr($url, 0, 8) === "https://") {
+            return $url;
+        }
+
+        $baseUrl = $this->baseUrl;
+
+        if (substr($url, 0, 1) === "/") {
+            $path = parse_url($baseUrl, \PHP_URL_PATH);
+            if ($path !== null) {
+                $baseUrl = substr($baseUrl, 0, strlen($path) * -1);
+            }
+        }
+
+        return "{$baseUrl}/" . ltrim($url, "/");
     }
 
 

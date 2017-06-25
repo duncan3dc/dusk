@@ -50,6 +50,45 @@ class DuskTest extends \PHPUnit_Framework_TestCase
     }
 
 
+    public function testVisit()
+    {
+        $browser = $this->dusk->getBrowser();
+        $browser->shouldReceive("visit")->with("http://example.com/")->andReturn($browser);
+
+        $result = $this->dusk->visit("http://example.com/");
+        $this->assertSame($this->dusk, $result);
+    }
+
+
+    public function baseUrlProvider()
+    {
+        $data = [
+            "/sub/dir/"             =>  "http://example.com/sub/dir/",
+            "/sub"                  =>  "http://example.com/sub",
+            "sub/dir/"              =>  "http://example.com/base/url/sub/dir/",
+            "sub"                   =>  "http://example.com/base/url/sub",
+            "http://google.com"     =>  "http://google.com",
+            "https://google.com"    =>  "https://google.com",
+        ];
+        foreach ($data as $input => $expected) {
+            yield [$input, $expected];
+        }
+    }
+    /**
+     * @dataProvider baseUrlProvider
+     */
+    public function testSetBaseUrl($input, $expected)
+    {
+        $this->dusk->setBaseUrl("http://example.com/base/url");
+
+        $browser = $this->dusk->getBrowser();
+        $browser->shouldReceive("visit")->with($expected)->andReturn($browser);
+
+        $result = $this->dusk->visit($input);
+        $this->assertSame($this->dusk, $result);
+    }
+
+
     public function testProxy()
     {
         $this->dusk->getBrowser()->shouldReceive("passthru")->with("one", "two")->andReturn("yep");
@@ -62,9 +101,9 @@ class DuskTest extends \PHPUnit_Framework_TestCase
     public function testProxyBrowser()
     {
         $browser = $this->dusk->getBrowser();
-        $browser->shouldReceive("visit")->with("http://example.com/")->andReturn($browser);
+        $browser->shouldReceive("resize")->with(800, 600)->andReturn($browser);
 
-        $result = $this->dusk->visit("http://example.com/");
+        $result = $this->dusk->resize(800, 600);
         $this->assertSame($this->dusk, $result);
     }
 
