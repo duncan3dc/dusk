@@ -24,7 +24,7 @@
         <script type="text/javascript">
         function loadExternalCodeSnippets() {
             Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-                var src = pre.getAttribute('data-src');
+                var src = pre.getAttribute('data-src').replace( /\\/g, '/');
                 var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
                 var language = 'php';
 
@@ -144,37 +144,37 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1433616312"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1246182436"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1433616312" class="accordion-body collapse in">
+            <div id="namespace-1246182436" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-647456905"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-275727430"></a>
                                 <a href="../namespaces/duncan3dc.html" style="margin-left: 30px; padding-left: 0">duncan3dc</a>
             </div>
-            <div id="namespace-647456905" class="accordion-body collapse ">
+            <div id="namespace-275727430" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1075099196"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-97898782"></a>
                                 <a href="../namespaces/duncan3dc.Laravel.html" style="margin-left: 30px; padding-left: 0">Laravel</a>
             </div>
-            <div id="namespace-1075099196" class="accordion-body collapse ">
+            <div id="namespace-97898782" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-182512671"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1899476893"></a>
                                 <a href="../namespaces/duncan3dc.Laravel.Drivers.html" style="margin-left: 30px; padding-left: 0">Drivers</a>
             </div>
-            <div id="namespace-182512671" class="accordion-body collapse ">
+            <div id="namespace-1899476893" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -305,7 +305,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on March 4th, 2017 at 16:31.
+                    on June 25th, 2017 at 18:25.
                 </section>
             </section>
         </section>

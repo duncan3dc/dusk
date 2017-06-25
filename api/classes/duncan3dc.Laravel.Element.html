@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -144,37 +144,37 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1230741716"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-982019821"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1230741716" class="accordion-body collapse in">
+            <div id="namespace-982019821" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-520984486"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2117365246"></a>
                                 <a href="../namespaces/duncan3dc.html" style="margin-left: 30px; padding-left: 0">duncan3dc</a>
             </div>
-            <div id="namespace-520984486" class="accordion-body collapse ">
+            <div id="namespace-2117365246" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1232239822"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2094944271"></a>
                                 <a href="../namespaces/duncan3dc.Laravel.html" style="margin-left: 30px; padding-left: 0">Laravel</a>
             </div>
-            <div id="namespace-1232239822" class="accordion-body collapse ">
+            <div id="namespace-2094944271" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1153616316"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1662734311"></a>
                                 <a href="../namespaces/duncan3dc.Laravel.Drivers.html" style="margin-left: 30px; padding-left: 0">Drivers</a>
             </div>
-            <div id="namespace-1153616316" class="accordion-body collapse ">
+            <div id="namespace-1662734311" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -250,6 +250,7 @@
                                                                     <a href="../classes/duncan3dc.Laravel.Element.html#method_elements" class="">elements()</a><br />
                                                                     <a href="../classes/duncan3dc.Laravel.Element.html#method_element" class="">element()</a><br />
                                                                     <a href="../classes/duncan3dc.Laravel.Element.html#method_parent" class="">parent()</a><br />
+                                                                    <a href="../classes/duncan3dc.Laravel.Element.html#method_click" class="">click()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No public properties found</em>
@@ -396,14 +397,16 @@
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.Laravel.Element.html"><div class="path-wrapper">\duncan3dc\Laravel\Element</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -431,13 +434,15 @@
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.Laravel.Element.html"><div class="path-wrapper">\duncan3dc\Laravel\Element</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -470,13 +475,15 @@
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.Laravel.Element.html"><div class="path-wrapper">\duncan3dc\Laravel\Element</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -506,13 +513,15 @@
                 
                                     <h4>Returns</h4>
                     array&lt;mixed,<a href="../classes/duncan3dc.Laravel.Element.html">\duncan3dc\Laravel\Element</a>&gt;
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.Laravel.Element.html"><div class="path-wrapper">\duncan3dc\Laravel\Element</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -542,13 +551,15 @@
                 
                                     <h4>Returns</h4>
                     <a href="../classes/duncan3dc.Laravel.Element.html">\duncan3dc\Laravel\Element</a>|null
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.Laravel.Element.html"><div class="path-wrapper">\duncan3dc\Laravel\Element</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -578,13 +589,53 @@
                 
                                     <h4>Returns</h4>
                     <a href="../classes/duncan3dc.Laravel.Element.html">\duncan3dc\Laravel\Element</a>|null
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.Laravel.Element.html"><div class="path-wrapper">\duncan3dc\Laravel\Element</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_click" name="method_click" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">click()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">click(string  <span class="argument">$selector = null</span>) : $this</pre>
+                <p><em>Click the element at the given selector (or this element).</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$selector </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.Laravel.Element.html"><div class="path-wrapper">\duncan3dc\Laravel\Element</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -642,7 +693,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on March 4th, 2017 at 16:31.
+                    on June 25th, 2017 at 18:25.
                 </section>
             </section>
         </section>
