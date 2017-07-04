@@ -15,6 +15,10 @@ class Dusk
      */
     private $browser;
 
+    /**
+     * @var DriverInterface $driver The driver instance in use.
+     */
+    private $driver;
 
     /**
      * @var string $baseUrl The base url.
@@ -34,6 +38,9 @@ class Dusk
         }
 
         $this->browser = new Browser($driver->getDriver());
+
+        # Stash the driver so that its destructor is called in sync with this instance
+        $this->driver = $driver;
     }
 
 

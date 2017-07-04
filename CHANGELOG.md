@@ -5,6 +5,14 @@ Changelog
 
 --------
 
+## 0.3.1 - 2017-07-04
+
+### Fixed
+
+* [Drivers] Ensure the drivers live as long as the Dusk instance (https://github.com/duncan3dc/dusk/issues/2).
+
+--------
+
 ## 0.3.0 - 2017-06-25
 
 ### Added

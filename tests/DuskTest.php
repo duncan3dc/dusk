@@ -38,6 +38,30 @@ class DuskTest extends \PHPUnit_Framework_TestCase
     }
 
 
+    public function testDriverLives()
+    {
+        # Ensure no instances of the driver have been created
+        $this->assertSame(0, Driver::$instances);
+
+        # Create a new instance and ensure it's tracked
+        $driver = new Driver;
+        $this->assertSame(1, Driver::$instances);
+
+        $dusk = new Dusk($driver);
+
+        # Ensure that the driver still lives
+        $this->assertSame(1, Driver::$instances);
+
+        # Even after we stop using it here
+        unset($driver);
+        $this->assertSame(1, Driver::$instances);
+
+        # Now we're done with dusk ensure the driver is destroyed
+        unset($dusk);
+        $this->assertSame(0, Driver::$instances);
+    }
+
+
     public function testgetBrowser()
     {
         $this->assertInstanceOf(Browser::class, $this->dusk->getBrowser());
