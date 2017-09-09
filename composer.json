@@ -13,7 +13,7 @@
     }],
     "require": {
         "laravel/dusk": ">=2.0,<2.1",
-        "php": "^5.6|^7.0"
+        "php": "^7.0"
     },
     "require-dev": {
         "duncan3dc/object-intruder": "^0.1.0",
