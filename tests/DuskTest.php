@@ -10,8 +10,9 @@ use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\RemoteWebElement;
 use Laravel\Dusk\Browser;
 use Mockery;
+use PHPUnit\Framework\TestCase;
 
-class DuskTest extends \PHPUnit_Framework_TestCase
+class DuskTest extends TestCase
 {
     private $dusk;
 
