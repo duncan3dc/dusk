@@ -15,6 +15,15 @@ interface DriverInterface
      */
     public function setCapabilities(WebDriverCapabilities $capabilities);
 
+
+    /**
+     * Get the capabilities for this browser.
+     *
+     * @return WebDriverCapabilities
+     */
+    public function getCapabilities(): WebDriverCapabilities;
+
+
     /**
      * Get the web driver instance for this browser.
      *

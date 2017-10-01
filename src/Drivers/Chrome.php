@@ -23,13 +23,6 @@ class Chrome implements DriverInterface
     public function __construct()
     {
         static::startChromeDriver();
-
-        $capabilities = DesiredCapabilities::chrome();
-
-        $options = (new ChromeOptions)->addArguments(["--headless"]);
-        $capabilities->setCapability(ChromeOptions::CAPABILITY, $options);
-
-        $this->setCapabilities($capabilities);
     }
 
 
@@ -46,9 +39,27 @@ class Chrome implements DriverInterface
     /**
      * {@inheritDoc}
      */
+    public function getCapabilities(): WebDriverCapabilities
+    {
+        if ($this->capabilities === null) {
+            $this->capabilities = DesiredCapabilities::chrome();
+
+            $options = (new ChromeOptions)->addArguments(["--headless"]);
+            $this->capabilities->setCapability(ChromeOptions::CAPABILITY, $options);
+        }
+
+        return $this->capabilities;
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
     public function getDriver()
     {
-        return RemoteWebDriver::create("http://localhost:9515", $this->capabilities);
+        $capabilities = $this->getCapabilities();
+
+        return RemoteWebDriver::create("http://localhost:9515", $capabilities);
     }
 
 

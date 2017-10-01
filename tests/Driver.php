@@ -25,6 +25,10 @@ class Driver implements DriverInterface
     {
     }
 
+    public function getCapabilities(): WebDriverCapabilities
+    {
+    }
+
     public function getDriver()
     {
         $remote = Mockery::mock(RemoteWebDriver::class);
