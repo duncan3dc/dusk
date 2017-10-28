@@ -12,7 +12,7 @@
         "role": "Developer"
     }],
     "require": {
-        "laravel/dusk": ">=2.0,<2.1",
+        "laravel/dusk": ">=2.0.1,<2.1",
         "php": "^7.0"
     },
     "require-dev": {

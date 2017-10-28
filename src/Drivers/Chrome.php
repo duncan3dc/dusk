@@ -4,7 +4,7 @@ namespace duncan3dc\Laravel\Drivers;
 
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
-use Laravel\Dusk\SupportsChrome;
+use Laravel\Dusk\Chrome\SupportsChrome;
 
 class Chrome implements DriverInterface
 {

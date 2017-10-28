@@ -5,6 +5,14 @@ Changelog
 
 --------
 
+## 0.4.1 - 2017-10-28
+
+### Fixed
+
+* [Dusk] Updated the code to handle a breaking change made upstream in 2.0.1.
+
+--------
+
 ## 0.4.0 - 2017-07-05
 
 ### Added
