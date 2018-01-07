@@ -6,16 +6,22 @@ use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\WebDriverCapabilities;
-use Laravel\Dusk\Chrome\SupportsChrome;
 
 class Chrome implements DriverInterface
 {
-    use SupportsChrome;
+    /**
+     * The port to run on.
+     *
+     * @var int
+     */
+    private $port;
 
     /**
-     * @var callable $afterClass A function to call after the class is finished with.
+     * The Chromedriver process instance.
+     *
+     * @var \Symfony\Component\Process\Process
      */
-    private static $afterClass;
+    private $process;
 
     /**
      * @var WebDriverCapabilities $capabilities The capabilities in use.
@@ -26,9 +32,11 @@ class Chrome implements DriverInterface
     /**
      * Create a new instance and automatically start the driver.
      */
-    public function __construct()
+    public function __construct(int $port = 9515)
     {
-        static::startChromeDriver();
+        $this->port = $port;
+
+        $this->start();
 
         $capabilities = DesiredCapabilities::chrome();
 
@@ -53,29 +61,49 @@ class Chrome implements DriverInterface
      */
     public function getDriver(): RemoteWebDriver
     {
-        return RemoteWebDriver::create("http://localhost:9515", $this->capabilities);
+        return RemoteWebDriver::create("http://localhost:{$this->port}", $this->capabilities);
     }
 
 
     /**
-     * Required for upstream compatibility.
+     * Start the Chromedriver process.
      *
-     * @param callable $handler A function to call after the class is finished with.
-     *
-     * @return void
+     * @return $this
      */
-    protected static function afterClass($handler)
+    public function start(): DriverInterface
     {
-        self::$afterClass = $handler;
+        if (!$this->process) {
+            $this->process = (new ChromeProcess($this->port))->toProcess();
+            $this->process->start();
+        }
+
+        return $this;
     }
 
 
     /**
      * Ensure the driver is closed by the upstream library.
+     *
+     * @return $this
+     */
+    public function stop(): DriverInterface
+    {
+        if ($this->process) {
+            $this->process->stop();
+            unset($this->process);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * Automatically end the driver when this class is done with.
+     *
+     * @return void
      */
     public function __destruct()
     {
-        $handler = self::$afterClass;
-        $handler();
+        $this->stop();
     }
 }
