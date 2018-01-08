@@ -4,6 +4,7 @@ namespace duncan3dc\LaravelTests;
 
 use duncan3dc\Laravel\Drivers\DriverInterface;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
+use Facebook\WebDriver\WebDriverCapabilities;
 use Mockery;
 
 class Driver implements DriverInterface
@@ -18,6 +19,10 @@ class Driver implements DriverInterface
     public function __destruct()
     {
         --self::$instances;
+    }
+
+    public function setCapabilities(WebDriverCapabilities $capabilities)
+    {
     }
 
     public function getDriver()

@@ -4,6 +4,7 @@ namespace duncan3dc\Laravel\Drivers;
 
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
+use Facebook\WebDriver\WebDriverCapabilities;
 use Laravel\Dusk\Chrome\SupportsChrome;
 
 class Chrome implements DriverInterface
@@ -12,6 +13,8 @@ class Chrome implements DriverInterface
 
     private static $afterClass;
 
+    private $capabilities;
+
 
     /**
      * Create a new instance and automatically start the driver.
@@ -19,6 +22,18 @@ class Chrome implements DriverInterface
     public function __construct()
     {
         static::startChromeDriver();
+
+        $this->setCapabilities(DesiredCapabilities::chrome());
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCapabilities(WebDriverCapabilities $capabilities)
+    {
+        $this->capabilities = $capabilities;
+        return $this;
     }
 
 
@@ -27,7 +42,7 @@ class Chrome implements DriverInterface
      */
     public function getDriver()
     {
-        return RemoteWebDriver::create("http://localhost:9515", DesiredCapabilities::chrome());
+        return RemoteWebDriver::create("http://localhost:9515", $this->capabilities);
     }
 
 

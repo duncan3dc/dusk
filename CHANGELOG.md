@@ -5,6 +5,14 @@ Changelog
 
 --------
 
+## 0.5.0 - 2018-01-08
+
+### Added
+
+* [Drivers] Added a method to set the capabilities of the browser.
+
+--------
+
 ## 0.4.1 - 2017-10-28
 
 ### Fixed
