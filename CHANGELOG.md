@@ -5,6 +5,14 @@ Changelog
 
 --------
 
+## 0.6.0 - 2018-02-05
+
+### Changed
+
+* [Drivers] Use Chrome in headless mode by default.
+
+--------
+
 ## 0.5.0 - 2018-01-08
 
 ### Added

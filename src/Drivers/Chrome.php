@@ -2,6 +2,7 @@
 
 namespace duncan3dc\Laravel\Drivers;
 
+use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\WebDriverCapabilities;
@@ -23,7 +24,12 @@ class Chrome implements DriverInterface
     {
         static::startChromeDriver();
 
-        $this->setCapabilities(DesiredCapabilities::chrome());
+        $capabilities = DesiredCapabilities::chrome();
+
+        $options = (new ChromeOptions)->addArguments(["--headless"]);
+        $capabilities->setCapability(ChromeOptions::CAPABILITY, $options);
+
+        $this->setCapabilities($capabilities);
     }
 
 

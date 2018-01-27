@@ -13,7 +13,7 @@
     }],
     "require": {
         "facebook/webdriver": "^1.0",
-        "laravel/dusk": ">=2.0.1,<2.1",
+        "laravel/dusk": ">=2.0.11,<2.1",
         "php": "^7.0"
     },
     "require-dev": {
