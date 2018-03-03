@@ -12,8 +12,14 @@ class Chrome implements DriverInterface
 {
     use SupportsChrome;
 
+    /**
+     * @var callable $afterClass A function to call after the class is finished with.
+     */
     private static $afterClass;
 
+    /**
+     * @var WebDriverCapabilities $capabilities The capabilities in use.
+     */
     private $capabilities;
 
 
@@ -36,17 +42,16 @@ class Chrome implements DriverInterface
     /**
      * {@inheritDoc}
      */
-    public function setCapabilities(WebDriverCapabilities $capabilities)
+    public function setCapabilities(WebDriverCapabilities $capabilities): void
     {
         $this->capabilities = $capabilities;
-        return $this;
     }
 
 
     /**
      * {@inheritDoc}
      */
-    public function getDriver()
+    public function getDriver(): RemoteWebDriver
     {
         return RemoteWebDriver::create("http://localhost:9515", $this->capabilities);
     }
@@ -54,6 +59,10 @@ class Chrome implements DriverInterface
 
     /**
      * Required for upstream compatibility.
+     *
+     * @param callable $handler A function to call after the class is finished with.
+     *
+     * @return void
      */
     protected static function afterClass($handler)
     {

@@ -51,7 +51,7 @@ class Dusk
      *
      * @return $this
      */
-    public function setBaseUrl($url)
+    public function setBaseUrl(string $url): Dusk
     {
         $this->baseUrl = rtrim($url, "/");
 
@@ -62,14 +62,14 @@ class Dusk
     /**
      * Proxy any methods to the internal browser instance.
      *
-     * @param string $function The method name to call
+     * @param string $method The method name to call
      * @param array $args The parameters to pass to the method
      *
      * @return mixed
      */
-    public function __call($function, $args)
+    public function __call($method, $args)
     {
-        $result = $this->browser->$function(...$args);
+        $result = $this->browser->$method(...$args);
 
         if ($result instanceof Browser) {
             return $this;
@@ -92,7 +92,7 @@ class Dusk
      *
      * @return Browser
      */
-    public function getBrowser()
+    public function getBrowser(): Browser
     {
         return $this->browser;
     }
@@ -103,7 +103,7 @@ class Dusk
      *
      * @return RemoteWebDriver
      */
-    public function getDriver()
+    public function getDriver(): RemoteWebDriver
     {
         return $this->browser->driver;
     }
@@ -116,7 +116,7 @@ class Dusk
      *
      * @return $this
      */
-    public function visit($url)
+    public function visit(string $url): Dusk
     {
         $url = $this->applyBaseUrl($url);
 
@@ -133,7 +133,7 @@ class Dusk
      *
      * @return string
      */
-    private function applyBaseUrl($url)
+    private function applyBaseUrl(string $url): string
     {
         if ($this->baseUrl === null) {
             return $url;
@@ -167,7 +167,7 @@ class Dusk
      *
      * @return $this
      */
-    public function screenshot($filename)
+    public function screenshot(string $filename): Dusk
     {
         $this->getDriver()->takeScreenshot("/tmp/{$filename}.png");
 
@@ -182,7 +182,7 @@ class Dusk
      *
      * @return $this;
      */
-    public function executeScript($script)
+    public function executeScript(string $script): Dusk
     {
         $this->getDriver()->executeScript($script);
 

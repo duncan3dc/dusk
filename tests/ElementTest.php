@@ -110,15 +110,17 @@ class ElementTest extends TestCase
      */
     public function testParent($selector, $xpath)
     {
+        $parent = Mockery::mock(Element::class);
+
         $this->remote->shouldReceive("findElement")->with(\Mockery::on(function ($param) use ($xpath) {
             if ($param->getMechanism() !== "xpath") {
                 return false;
             }
             return ($param->getValue() === $xpath);
-        }))->andReturn("parent");
+        }))->andReturn($parent);
 
         $result = $this->element->parent($selector);
-        $this->assertSame("parent", $result);
+        $this->assertSame($parent, $result);
     }
 
 

@@ -13,12 +13,12 @@ interface DriverInterface
      *
      * @return void
      */
-    public function setCapabilities(WebDriverCapabilities $capabilities);
+    public function setCapabilities(WebDriverCapabilities $capabilities): void;
 
     /**
      * Get the web driver instance for this browser.
      *
      * @return RemoteWebDriver
      */
-    public function getDriver();
+    public function getDriver(): RemoteWebDriver;
 }

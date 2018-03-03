@@ -28,6 +28,14 @@ class Element
     private $driver;
 
 
+    /**
+     * Convert a standard element to one of our bespoke elements.
+     *
+     * @param RemoteWebElement|Element $element The element to convert
+     * @param RemoteWebDriver $driver The driver that contains this element
+     *
+     * @return mixed
+     */
     public static function convertElement($element, RemoteWebDriver $driver)
     {
         if ($element instanceof RemoteWebElement) {
@@ -38,6 +46,12 @@ class Element
     }
 
 
+    /**
+     * Create a new instance.
+     *
+     * @param RemoteWebElement $element The element to wrap
+     * @param RemoteWebDriver $driver The driver that contains this element
+     */
     private function __construct(RemoteWebElement $element, RemoteWebDriver $driver)
     {
         $this->remote = $element;
@@ -46,9 +60,17 @@ class Element
     }
 
 
-    public function __call($function, $args)
+    /**
+     * Pass a method call to the wrapped instance.
+     *
+     * @param string $method The name of the method to call
+     * @param array $args The parameters to pass to the method
+     *
+     * @return mixed
+     */
+    public function __call($method, $args)
     {
-        $result = $this->remote->$function(...$args);
+        $result = $this->remote->$method(...$args);
 
         $result = self::convertElement($result, $this->driver);
 
@@ -69,7 +91,7 @@ class Element
      *
      * @return Element[]
      */
-    public function elements($selector)
+    public function elements(string $selector): array
     {
         $elements = $this->resolver->all($selector);
 
@@ -86,9 +108,9 @@ class Element
      *
      * @param string $selector
      *
-     * @return Element|null
+     * @return ?Element
      */
-    public function element($selector)
+    public function element(string $selector): ?Element
     {
         $element = $this->resolver->find($selector);
         return self::convertElement($element, $this->driver);
@@ -100,9 +122,9 @@ class Element
      *
      * @param string $selector
      *
-     * @return Element|null
+     * @return ?Element
      */
-    public function parent($selector = "*")
+    public function parent(string $selector = "*"): ?Element
     {
         if ($selector === "*") {
             $prefix = "parent";
@@ -123,7 +145,7 @@ class Element
      *
      * @return $this
      */
-    public function click($selector = null)
+    public function click(string $selector = null): Element
     {
         if ($selector === null) {
             $element = $this->remote;
@@ -144,7 +166,7 @@ class Element
      *
      * @return $this
      */
-    public function mouseover($selector = null)
+    public function mouseover(string $selector = null): Element
     {
         if ($selector === null) {
             $element = $this->remote;

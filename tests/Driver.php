@@ -21,11 +21,11 @@ class Driver implements DriverInterface
         --self::$instances;
     }
 
-    public function setCapabilities(WebDriverCapabilities $capabilities)
+    public function setCapabilities(WebDriverCapabilities $capabilities): void
     {
     }
 
-    public function getDriver()
+    public function getDriver(): RemoteWebDriver
     {
         $remote = Mockery::mock(RemoteWebDriver::class);
         $remote->shouldReceive("quit");
