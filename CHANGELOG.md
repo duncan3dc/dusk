@@ -5,6 +5,19 @@ Changelog
 
 --------
 
+## 0.7.0 - 2018-04-05
+
+### Added
+
+* [Chrome] Allow the port to be specified.
+
+### Changed
+
+* [Support] Dropped support for PHP 7.0.
+* [Laravel] Updated to work with version 3.0 from upstream.
+
+--------
+
 ## 0.6.0 - 2018-02-05
 
 ### Changed
