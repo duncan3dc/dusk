@@ -75,6 +75,7 @@ class Chrome implements DriverInterface
         if (!$this->process) {
             $this->process = (new ChromeProcess($this->port))->toProcess();
             $this->process->start();
+            sleep(1);
         }
 
         return $this;
