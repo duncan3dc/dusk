@@ -5,6 +5,14 @@ Changelog
 
 --------
 
+## 0.7.1 - 2018-04-07
+
+### Fixed
+
+* [Dependencies] Add a dependency on PHPUnit because upstream requires it but doesn't declare it.
+
+--------
+
 ## 0.7.0 - 2018-04-05
 
 ### Added
