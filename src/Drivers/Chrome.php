@@ -10,11 +10,21 @@ use Facebook\WebDriver\WebDriverCapabilities;
 class Chrome implements DriverInterface
 {
     /**
-     * The port to run on.
+     * Configuration options for this Chrome driver.
      *
-     * @var int
+     * @var array
      */
-    private $port;
+    private $config;
+
+    /**
+     * Default configuration options for this Chrome driver.
+     *
+     * @var array
+     */
+    private $defaultConfig = [
+        'port' => 9515,
+        'headless' => true
+    ];
 
     /**
      * The Chromedriver process instance.
@@ -32,16 +42,26 @@ class Chrome implements DriverInterface
     /**
      * Create a new instance and automatically start the driver.
      */
-    public function __construct(int $port = 9515)
+    public function __construct($config = [])
     {
-        $this->port = $port;
+        // Backwards compatibility for specifying $port as the only argument
+        if (is_numeric($config)) {
+            $config = [
+                'port' => $config
+            ];
+        }
+
+        $this->config = array_merge($this->defaultConfig, $config);
 
         $this->start();
 
         $capabilities = DesiredCapabilities::chrome();
 
-        $options = (new ChromeOptions)->addArguments(["--headless"]);
-        $capabilities->setCapability(ChromeOptions::CAPABILITY, $options);
+        $chromeOptions = new ChromeOptions;
+        if ($this->config['headless']) {
+            $chromeOptions->addArguments(["--headless"]);
+        }
+        $capabilities->setCapability(ChromeOptions::CAPABILITY, $chromeOptions);
 
         $this->setCapabilities($capabilities);
     }
@@ -61,7 +81,7 @@ class Chrome implements DriverInterface
      */
     public function getDriver(): RemoteWebDriver
     {
-        return RemoteWebDriver::create("http://localhost:{$this->port}", $this->capabilities);
+        return RemoteWebDriver::create("http://localhost:{$this->config['port']}", $this->capabilities);
     }
 
 
@@ -73,7 +93,7 @@ class Chrome implements DriverInterface
     public function start(): DriverInterface
     {
         if (!$this->process) {
-            $this->process = (new ChromeProcess($this->port))->toProcess();
+            $this->process = (new ChromeProcess($this->config['port']))->toProcess();
             $this->process->start();
             sleep(1);
         }
