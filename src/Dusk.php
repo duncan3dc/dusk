@@ -163,13 +163,14 @@ class Dusk
     /**
      * Take a screenshot and store it on disk.
      *
-     * @param string $filename The filename to store (no extension)
+     * @param string $filename      The filename to store (no extension)
+     * @param string $screenshotDir The directory to store the screenshot. Defaults to "/tmp".
      *
      * @return $this
      */
-    public function screenshot(string $filename): Dusk
+    public function screenshot(string $filename, string $screenshotDir = '/tmp'): Dusk
     {
-        $this->getDriver()->takeScreenshot("/tmp/{$filename}.png");
+        $this->getDriver()->takeScreenshot("{$screenshotDir}/{$filename}.png");
 
         return $this;
     }
