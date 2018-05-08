@@ -7,6 +7,7 @@ use duncan3dc\Laravel\Drivers\DriverInterface;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\RemoteWebElement;
 use Laravel\Dusk\Browser;
+use function substr;
 
 class Dusk
 {
@@ -169,7 +170,15 @@ class Dusk
      */
     public function screenshot(string $filename): Dusk
     {
-        $this->getDriver()->takeScreenshot("/tmp/{$filename}.png");
+        if (substr($filename, 0, 1) !== "/") {
+            $filename = "/tmp/{$filename}";
+        }
+
+        if (substr($filename, -4) !== ".png") {
+            $filename .= ".png";
+        }
+
+        $this->getDriver()->takeScreenshot($filename);
 
         return $this;
     }

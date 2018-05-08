@@ -155,11 +155,25 @@ class DuskTest extends TestCase
     }
 
 
-    public function testScreenshot()
+    public function testScreenshot1()
     {
         $this->dusk->getDriver()->shouldReceive("takeScreenshot")->with("/tmp/page1.png");
 
         $result = $this->dusk->screenshot("page1");
+        $this->assertSame($this->dusk, $result);
+    }
+    public function testScreenshot2()
+    {
+        $this->dusk->getDriver()->shouldReceive("takeScreenshot")->with("/custom/path/page2.png");
+
+        $result = $this->dusk->screenshot("/custom/path/page2");
+        $this->assertSame($this->dusk, $result);
+    }
+    public function testScreenshot3()
+    {
+        $this->dusk->getDriver()->shouldReceive("takeScreenshot")->with("/tmp/page3.png");
+
+        $result = $this->dusk->screenshot("page3.png");
         $this->assertSame($this->dusk, $result);
     }
 

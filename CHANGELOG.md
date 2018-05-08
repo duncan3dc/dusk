@@ -5,6 +5,14 @@ Changelog
 
 --------
 
+## 0.8.0 - 2018-05-08
+
+### Added
+
+* [Dusk] Allow `screenshot()` to be called with a fully qualified path.
+
+--------
+
 ## 0.7.1 - 2018-04-07
 
 ### Fixed
