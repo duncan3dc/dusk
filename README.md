@@ -4,10 +4,9 @@ Use Dusk browser automation as a standalone component without the full Laravel f
 Full documentation is available at http://duncan3dc.github.io/dusk/  
 PHPDoc API documentation is also available at [http://duncan3dc.github.io/dusk/api/](http://duncan3dc.github.io/dusk/api/namespaces/duncan3dc.Laravel.html)  
 
-[![Latest Stable Version](https://poser.pugx.org/duncan3dc/dusk/version.svg)](https://packagist.org/packages/duncan3dc/dusk)
-[![Build Status](https://travis-ci.org/duncan3dc/dusk.svg?branch=master)](https://travis-ci.org/duncan3dc/dusk)
-[![Coverage Status](https://coveralls.io/repos/github/duncan3dc/dusk/badge.svg)](https://coveralls.io/github/duncan3dc/dusk)
-
+[![release](https://poser.pugx.org/duncan3dc/dusk/version.svg)](https://packagist.org/packages/duncan3dc/dusk)
+[![build](https://travis-ci.org/duncan3dc/dusk.svg?branch=master)](https://travis-ci.org/duncan3dc/dusk)
+[![coverage](https://codecov.io/gh/duncan3dc/dusk/graph/badge.svg)](https://codecov.io/gh/duncan3dc/dusk)
 
 ## Installation
 
