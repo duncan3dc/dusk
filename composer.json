@@ -20,9 +20,8 @@
     },
     "require-dev": {
         "duncan3dc/object-intruder": "^0.3.0",
-        "maglnet/composer-require-checker": "^0.2.1",
-        "mockery/mockery": "^1.0",
-        "phpunit/phpunit": "^7.1"
+        "maglnet/composer-require-checker": "^1.1",
+        "mockery/mockery": "^1.2"
     },
     "autoload": {
         "psr-4": {"duncan3dc\\Laravel\\": "src/"}
