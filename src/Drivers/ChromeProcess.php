@@ -30,10 +30,10 @@ class ChromeProcess extends \Laravel\Dusk\Chrome\ChromeProcess
      *
      * @return Process
      */
-    protected function process()
+    public function toProcess(array $arguments = [])
     {
-        return (new Process(
-            [realpath($this->driver), " --port={$this->port}"], null, $this->chromeEnvironment()
-        ));
+        $arguments[] = "--port={$this->port}";
+
+        return parent::toProcess($arguments);
     }
 }

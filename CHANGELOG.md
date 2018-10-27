@@ -5,6 +5,15 @@ Changelog
 
 --------
 
+## 0.9.0 - 2018-10-29
+
+### Changed
+
+* [Support] Added support for PHP 7.3.
+* [Laravel] Updated to work with version 4.0 from upstream.
+
+--------
+
 ## 0.8.0 - 2018-05-08
 
 ### Added
