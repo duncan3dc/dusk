@@ -45,7 +45,7 @@ class DuskTest extends TestCase
         $this->assertSame(0, Driver::$instances);
 
         # Create a new instance and ensure it's tracked
-        $driver = new Driver;
+        $driver = new Driver();
         $this->assertSame(1, Driver::$instances);
 
         $dusk = new Dusk($driver);

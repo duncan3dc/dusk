@@ -40,7 +40,7 @@ class Chrome implements DriverInterface
 
         $capabilities = DesiredCapabilities::chrome();
 
-        $options = (new ChromeOptions)->addArguments(["--headless"]);
+        $options = (new ChromeOptions())->addArguments(["--headless"]);
         $capabilities->setCapability(ChromeOptions::CAPABILITY, $options);
 
         $this->setCapabilities($capabilities);

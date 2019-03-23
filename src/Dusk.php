@@ -35,7 +35,7 @@ class Dusk
     public function __construct(DriverInterface $driver = null)
     {
         if ($driver === null) {
-            $driver =  new Chrome;
+            $driver =  new Chrome();
         }
 
         $this->browser = new Browser($driver->getDriver());
