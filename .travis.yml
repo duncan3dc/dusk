@@ -26,6 +26,11 @@ script:
 jobs:
   include:
 
+    - stage: code quality
+      script:
+        - vendor/bin/phpstan analyse --level=max --configuration=phpstan-src.neon src
+        - vendor/bin/phpstan analyse --level=max --configuration=phpstan-tests.neon tests
+
     - stage: coding standards
       script:
         - vendor/bin/phpcs --standard=phpcs.xml src tests

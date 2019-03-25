@@ -2,12 +2,38 @@
 
 namespace duncan3dc\Laravel;
 
+use Facebook\WebDriver\Interactions\Internal\WebDriverCoordinates;
+use Facebook\WebDriver\Remote\FileDetector;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\RemoteWebElement;
 use Facebook\WebDriver\WebDriverBy;
+use Facebook\WebDriver\WebDriverDimension;
+use Facebook\WebDriver\WebDriverElement;
+use Facebook\WebDriver\WebDriverPoint;
 use Laravel\Dusk\Concerns\InteractsWithElements;
 use Laravel\Dusk\ElementResolver;
 
+/**
+ * @method self clear()
+ * @method self findElement(WebDriverBy $by)
+ * @method self[] findElements(WebDriverBy $by)
+ * @method ?string getAttribute(string $attribute_name)
+ * @method string getCSSValue(string $css_property_name)
+ * @method WebDriverPoint getLocation()
+ * @method WebDriverPoint getLocationOnScreenOnceScrolledIntoView()
+ * @method WebDriverCoordinates getCoordinates()
+ * @method WebDriverDimension getSize()
+ * @method string getTagName()
+ * @method string getText()
+ * @method bool isDisplayed()
+ * @method bool isEnabled()
+ * @method bool isSelected()
+ * @method self sendKeys(mixed $value)
+ * @method self setFileDetector(FileDetector $detector)
+ * @method self submit()
+ * @method string getID()
+ * @method bool equals(WebDriverElement $other)
+ */
 class Element
 {
     use InteractsWithElements;
@@ -31,7 +57,7 @@ class Element
     /**
      * Convert a standard element to one of our bespoke elements.
      *
-     * @param RemoteWebElement|Element $element The element to convert
+     * @param mixed $element The element to convert
      * @param RemoteWebDriver $driver The driver that contains this element
      *
      * @return mixed

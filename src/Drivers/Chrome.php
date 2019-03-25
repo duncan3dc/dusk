@@ -6,26 +6,17 @@ use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\WebDriverCapabilities;
+use Symfony\Component\Process\Process;
 
 class Chrome implements DriverInterface
 {
-    /**
-     * The port to run on.
-     *
-     * @var int
-     */
+    /** @var int */
     private $port;
 
-    /**
-     * The Chromedriver process instance.
-     *
-     * @var \Symfony\Component\Process\Process
-     */
+    /** @var Process|null */
     private $process;
 
-    /**
-     * @var WebDriverCapabilities $capabilities The capabilities in use.
-     */
+    /** @var WebDriverCapabilities */
     private $capabilities;
 
 
