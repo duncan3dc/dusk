@@ -16,7 +16,7 @@ class DuskTest extends TestCase
 {
     private $dusk;
 
-    public function setUp()
+    public function setUp(): void
     {
         $driver = Mockery::mock(RemoteWebDriver::class);
 
@@ -32,7 +32,7 @@ class DuskTest extends TestCase
     }
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
         unset($this->dusk);

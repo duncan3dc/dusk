@@ -14,7 +14,7 @@
     "require": {
         "facebook/webdriver": "^1.0",
         "laravel/dusk": ">=5.0.0,<5.1",
-        "phpunit/phpunit": "^7.1",
+        "phpunit/phpunit": "^7.1 || ^8.0",
         "symfony/process": "^4.0",
         "php": "^7.1"
     },

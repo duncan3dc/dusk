@@ -15,7 +15,7 @@ class ElementTest extends TestCase
     private $element;
 
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->remote = Mockery::mock(RemoteWebElement::class);
         $this->driver = Mockery::mock(RemoteWebDriver::class);
@@ -24,7 +24,7 @@ class ElementTest extends TestCase
     }
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
