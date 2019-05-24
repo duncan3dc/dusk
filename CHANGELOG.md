@@ -5,6 +5,14 @@ Changelog
 
 --------
 
+## 1.0.1 - 2019-05-24
+
+### Changed
+
+* [Laravel] Updated to work with version 5.1 from upstream.
+
+--------
+
 ## 1.0.0 - 2019-03-25
 
 ### Changed
