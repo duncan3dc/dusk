@@ -7,6 +7,7 @@ use duncan3dc\Laravel\Drivers\DriverInterface;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\RemoteWebElement;
 use Laravel\Dusk\Browser;
+
 use function substr;
 
 class Dusk
