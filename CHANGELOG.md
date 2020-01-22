@@ -5,6 +5,15 @@ Changelog
 
 --------
 
+## 1.0.2 - 2020-01-22
+
+### Changed
+
+* [Support] Dropped support for PHP 7.1.
+* [Dependencies] Added support for new versions of libraries.
+
+--------
+
 ## 1.0.1 - 2019-05-24
 
 ### Changed
