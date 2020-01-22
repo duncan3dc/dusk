@@ -5,7 +5,7 @@ Full documentation is available at http://duncan3dc.github.io/dusk/
 PHPDoc API documentation is also available at [http://duncan3dc.github.io/dusk/api/](http://duncan3dc.github.io/dusk/api/namespaces/duncan3dc.Laravel.html)  
 
 [![release](https://poser.pugx.org/duncan3dc/dusk/version.svg)](https://packagist.org/packages/duncan3dc/dusk)
-[![build](https://travis-ci.org/duncan3dc/dusk.svg?branch=master)](https://travis-ci.org/duncan3dc/dusk)
+[![build](https://github.com/duncan3dc/dusk/workflows/.github/workflows/buildcheck.yml/badge.svg?branch=master)](https://github.com/duncan3dc/dusk/actions?query=branch%3Amaster+workflow%3A.github%2Fworkflows%2Fbuildcheck.yml)
 [![coverage](https://codecov.io/gh/duncan3dc/dusk/graph/badge.svg)](https://codecov.io/gh/duncan3dc/dusk)
 
 ## Installation
