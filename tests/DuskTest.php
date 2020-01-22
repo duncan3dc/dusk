@@ -10,28 +10,41 @@ use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\RemoteWebElement;
 use Laravel\Dusk\Browser;
 use Mockery;
+use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 
 class DuskTest extends TestCase
 {
+    /** @var Dusk */
     private $dusk;
 
+    /** @var Browser|MockInterface */
+    private $browser;
+
+    /** @var RemoteWebDriver|MockInterface */
+    private $driver;
+
+
+    /** @inheritDoc */
     public function setUp(): void
     {
-        $driver = Mockery::mock(RemoteWebDriver::class);
+        $this->driver = Mockery::mock(RemoteWebDriver::class);
 
         $factory = Mockery::mock(DriverInterface::class);
-        $factory->shouldReceive("getDriver")->with()->andReturn($driver);
+        $factory->shouldReceive("getDriver")->with()->andReturn($this->driver);
 
         $this->dusk = new Dusk($factory);
 
+        $this->browser = Mockery::mock(Browser::class);
+        $this->browser->shouldReceive("quit");
+
         $dusk = new Intruder($this->dusk);
-        $dusk->browser = Mockery::mock(Browser::class);
-        $dusk->browser->shouldReceive("quit");
-        $dusk->browser->driver = $driver;
+        $dusk->browser = $this->browser;
+        $dusk->browser->driver = $this->driver;
     }
 
 
+    /** @inheritDoc */
     public function tearDown(): void
     {
         Mockery::close();
@@ -39,7 +52,7 @@ class DuskTest extends TestCase
     }
 
 
-    public function testDriverLives()
+    public function testDriverLives(): void
     {
         # Ensure no instances of the driver have been created
         $this->assertSame(0, Driver::$instances);
@@ -63,29 +76,31 @@ class DuskTest extends TestCase
     }
 
 
-    public function testgetBrowser()
+    public function testGetBrowser(): void
     {
         $this->assertInstanceOf(Browser::class, $this->dusk->getBrowser());
     }
 
 
-    public function testGetDriver()
+    public function testGetDriver(): void
     {
         $this->assertInstanceOf(RemoteWebDriver::class, $this->dusk->getDriver());
     }
 
 
-    public function testVisit()
+    public function testVisit(): void
     {
-        $browser = $this->dusk->getBrowser();
-        $browser->shouldReceive("visit")->with("http://example.com/")->andReturn($browser);
+        $this->browser->shouldReceive("visit")->with("http://example.com/")->andReturn($this->browser);
 
         $result = $this->dusk->visit("http://example.com/");
         $this->assertSame($this->dusk, $result);
     }
 
 
-    public function baseUrlProvider()
+    /**
+     * @return iterable<array>
+     */
+    public function baseUrlProvider(): iterable
     {
         $data = [
             "/sub/dir/"             =>  "http://example.com/sub/dir/",
@@ -99,52 +114,57 @@ class DuskTest extends TestCase
             yield [$input, $expected];
         }
     }
+
+
     /**
      * @dataProvider baseUrlProvider
+     *
+     * @param string $input
+     * @param string $expected
+     *
+     * @return void
      */
-    public function testSetBaseUrl($input, $expected)
+    public function testSetBaseUrl(string $input, string $expected): void
     {
         $this->dusk->setBaseUrl("http://example.com/base/url");
 
-        $browser = $this->dusk->getBrowser();
-        $browser->shouldReceive("visit")->with($expected)->andReturn($browser);
+        $this->browser->shouldReceive("visit")->with($expected)->andReturn($this->browser);
 
         $result = $this->dusk->visit($input);
         $this->assertSame($this->dusk, $result);
     }
 
 
-    public function testProxy()
+    public function testProxy(): void
     {
-        $this->dusk->getBrowser()->shouldReceive("passthru")->with("one", "two")->andReturn("yep");
+        $this->browser->shouldReceive("passthru")->with("one", "two")->andReturn("yep");
 
         $result = $this->dusk->passthru("one", "two");
         $this->assertSame("yep", $result);
     }
 
 
-    public function testProxyBrowser()
+    public function testProxyBrowser(): void
     {
-        $browser = $this->dusk->getBrowser();
-        $browser->shouldReceive("resize")->with(800, 600)->andReturn($browser);
+        $this->browser->shouldReceive("resize")->with(800, 600)->andReturn($this->browser);
 
         $result = $this->dusk->resize(800, 600);
         $this->assertSame($this->dusk, $result);
     }
 
 
-    public function testProxyElement()
+    public function testProxyElement(): void
     {
-        $this->dusk->getBrowser()->shouldReceive("element")->with("#main")->andReturn(Mockery::mock(RemoteWebElement::class));
+        $this->browser->shouldReceive("element")->with("#main")->andReturn(Mockery::mock(RemoteWebElement::class));
 
         $result = $this->dusk->element("#main");
         $this->assertInstanceOf(Element::class, $result);
     }
 
 
-    public function testProxyElements()
+    public function testProxyElements(): void
     {
-        $this->dusk->getBrowser()->shouldReceive("elements")->with(".page")->andReturn([
+        $this->browser->shouldReceive("elements")->with(".page")->andReturn([
             Mockery::mock(RemoteWebElement::class),
             Mockery::mock(RemoteWebElement::class),
             Mockery::mock(RemoteWebElement::class),
@@ -155,32 +175,32 @@ class DuskTest extends TestCase
     }
 
 
-    public function testScreenshot1()
+    public function testScreenshot1(): void
     {
-        $this->dusk->getDriver()->shouldReceive("takeScreenshot")->with("/tmp/page1.png");
+        $this->driver->shouldReceive("takeScreenshot")->with("/tmp/page1.png");
 
         $result = $this->dusk->screenshot("page1");
         $this->assertSame($this->dusk, $result);
     }
-    public function testScreenshot2()
+    public function testScreenshot2(): void
     {
-        $this->dusk->getDriver()->shouldReceive("takeScreenshot")->with("/custom/path/page2.png");
+        $this->driver->shouldReceive("takeScreenshot")->with("/custom/path/page2.png");
 
         $result = $this->dusk->screenshot("/custom/path/page2");
         $this->assertSame($this->dusk, $result);
     }
-    public function testScreenshot3()
+    public function testScreenshot3(): void
     {
-        $this->dusk->getDriver()->shouldReceive("takeScreenshot")->with("/tmp/page3.png");
+        $this->driver->shouldReceive("takeScreenshot")->with("/tmp/page3.png");
 
         $result = $this->dusk->screenshot("page3.png");
         $this->assertSame($this->dusk, $result);
     }
 
 
-    public function testExecuteScript()
+    public function testExecuteScript(): void
     {
-        $this->dusk->getDriver()->shouldReceive("executeScript")->with("alert('ok')");
+        $this->driver->shouldReceive("executeScript")->with("alert('ok')");
 
         $result = $this->dusk->executeScript("alert('ok')");
         $this->assertSame($this->dusk, $result);

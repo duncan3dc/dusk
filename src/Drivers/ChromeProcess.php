@@ -28,9 +28,11 @@ class ChromeProcess extends \Laravel\Dusk\Chrome\ChromeProcess
     /**
      * Build the Chromedriver with Symfony Process.
      *
-     * @return Process
+     * @param array<string> $arguments
+     *
+     * @return Process<int, string>
      */
-    public function toProcess(array $arguments = [])
+    public function toProcess(array $arguments = []): Process
     {
         $arguments[] = "--port={$this->port}";
 

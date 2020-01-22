@@ -13,7 +13,7 @@ class Chrome implements DriverInterface
     /** @var int */
     private $port;
 
-    /** @var Process|null */
+    /** @var Process<int, string>|null */
     private $process;
 
     /** @var WebDriverCapabilities */

@@ -90,7 +90,7 @@ class Element
      * Pass a method call to the wrapped instance.
      *
      * @param string $method The name of the method to call
-     * @param array $args The parameters to pass to the method
+     * @param array<mixed> $args The parameters to pass to the method
      *
      * @return mixed
      */

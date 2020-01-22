@@ -5,7 +5,6 @@ namespace duncan3dc\Laravel;
 use duncan3dc\Laravel\Drivers\Chrome;
 use duncan3dc\Laravel\Drivers\DriverInterface;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
-use Facebook\WebDriver\Remote\RemoteWebElement;
 use Laravel\Dusk\Browser;
 
 use function substr;
@@ -23,7 +22,7 @@ class Dusk
     private $driver;
 
     /**
-     * @var string $baseUrl The base url.
+     * @var string|null $baseUrl The base url.
      */
     private $baseUrl;
 
@@ -65,7 +64,7 @@ class Dusk
      * Proxy any methods to the internal browser instance.
      *
      * @param string $method The method name to call
-     * @param array $args The parameters to pass to the method
+     * @param array<mixed> $args The parameters to pass to the method
      *
      * @return mixed
      */
@@ -153,7 +152,7 @@ class Dusk
 
         if (substr($url, 0, 1) === "/") {
             $path = parse_url($baseUrl, \PHP_URL_PATH);
-            if ($path !== null) {
+            if ($path !== null && $path !== false) {
                 $baseUrl = substr($baseUrl, 0, strlen($path) * -1);
             }
         }

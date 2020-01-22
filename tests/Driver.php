@@ -9,6 +9,7 @@ use Mockery;
 
 class Driver implements DriverInterface
 {
+    /** @var int */
     public static $instances = 0;
 
     public function __construct()

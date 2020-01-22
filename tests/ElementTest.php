@@ -6,12 +6,18 @@ use duncan3dc\Laravel\Element;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\RemoteWebElement;
 use Mockery;
+use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 
 class ElementTest extends TestCase
 {
+    /** @var RemoteWebElement|MockInterface  */
     private $remote;
+
+    /** @var RemoteWebDriver|MockInterface  */
     private $driver;
+
+    /** @var Element */
     private $element;
 
 
@@ -30,7 +36,10 @@ class ElementTest extends TestCase
     }
 
 
-    public function elementProvider()
+    /**
+     * @return iterable<array>
+     */
+    public function elementProvider(): iterable
     {
         yield [Mockery::mock(RemoteWebElement::class), true];
 
@@ -45,10 +54,15 @@ class ElementTest extends TestCase
             yield [$input, false];
         }
     }
+
+
     /**
      * @dataProvider elementProvider
+     *
+     * @param mixed $input
+     * @param bool $wrap
      */
-    public function testConvertElement($input, $wrap)
+    public function testConvertElement($input, bool $wrap): void
     {
         $result = Element::convertElement($input, $this->driver);
 
@@ -60,7 +74,7 @@ class ElementTest extends TestCase
     }
 
 
-    public function testProxy()
+    public function testProxy(): void
     {
         $this->remote->shouldReceive("passthru")->with("one", "two")->andReturn("yep");
 
@@ -69,7 +83,7 @@ class ElementTest extends TestCase
     }
 
 
-    public function testProxyElement()
+    public function testProxyElement(): void
     {
         $this->remote->shouldReceive("passthru")->with("#main")->andReturn(Mockery::mock(RemoteWebElement::class));
 
@@ -78,7 +92,7 @@ class ElementTest extends TestCase
     }
 
 
-    public function testProxyElements()
+    public function testProxyElements(): void
     {
         $this->remote->shouldReceive("passthru")->with(".page")->andReturn([
             Mockery::mock(RemoteWebElement::class),
@@ -92,7 +106,10 @@ class ElementTest extends TestCase
     }
 
 
-    public function parentProvider()
+    /**
+     * @return iterable<array>
+     */
+    public function parentProvider(): iterable
     {
         $data = [
             "*"         =>  "parent::*",
@@ -105,10 +122,17 @@ class ElementTest extends TestCase
             yield [$selector, $xpath];
         }
     }
+
+
     /**
      * @dataProvider parentProvider
+     *
+     * @param string $selector
+     * @param string $xpath
+     *
+     * @return void
      */
-    public function testParent($selector, $xpath)
+    public function testParent(string $selector, string $xpath): void
     {
         $parent = Mockery::mock(Element::class);
 
@@ -124,7 +148,7 @@ class ElementTest extends TestCase
     }
 
 
-    public function testElement()
+    public function testElement(): void
     {
         $this->remote->shouldReceive("findElement")->andReturn(Mockery::mock(RemoteWebElement::class));
 
@@ -133,7 +157,7 @@ class ElementTest extends TestCase
     }
 
 
-    public function testElements()
+    public function testElements(): void
     {
         $this->remote->shouldReceive("findElements")->andReturn([
             Mockery::mock(RemoteWebElement::class),
@@ -147,13 +171,13 @@ class ElementTest extends TestCase
     }
 
 
-    public function testClick1()
+    public function testClick1(): void
     {
         $this->remote->shouldReceive("click");
         $result = $this->element->click();
         $this->assertInstanceOf(Element::class, $result);
     }
-    public function testClick2()
+    public function testClick2(): void
     {
         $remote = Mockery::mock(RemoteWebElement::class);
         $remote->shouldReceive("click");
