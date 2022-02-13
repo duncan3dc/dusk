@@ -30,7 +30,7 @@ class ChromeProcess extends \Laravel\Dusk\Chrome\ChromeProcess
      *
      * @param array<string> $arguments
      *
-     * @return Process<int, string>
+     * @return Process
      */
     public function toProcess(array $arguments = []): Process
     {
