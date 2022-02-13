@@ -5,6 +5,16 @@ Changelog
 
 --------
 
+## 1.1.0 - 2022-02-13
+
+### Changed
+
+* [Laravel] Updated to work with version 6 from upstream.
+* [Support] Added support for PHP 8.0 and PHP 8.1.
+* [Support] Dropped support for PHP 7.2.
+
+--------
+
 ## 1.0.2 - 2020-01-22
 
 ### Changed
