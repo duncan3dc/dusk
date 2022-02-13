@@ -14,7 +14,7 @@
     "require": {
         "php-webdriver/webdriver": "^1.0",
         "laravel/dusk": ">=5.0.0,<5.9",
-        "phpunit/phpunit": "^8.0",
+        "phpunit/phpunit": "^9.5.13",
         "symfony/process": "^5.4",
         "php": "^7.3"
     },
