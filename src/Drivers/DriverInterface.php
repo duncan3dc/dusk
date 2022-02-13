@@ -7,7 +7,6 @@ use Facebook\WebDriver\WebDriverCapabilities;
 
 interface DriverInterface
 {
-
     /**
      * Set the capabilities for this browser.
      *
