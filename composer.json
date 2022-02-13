@@ -15,7 +15,7 @@
         "php-webdriver/webdriver": "^1.0",
         "laravel/dusk": ">=5.0.0,<5.9",
         "phpunit/phpunit": "^8.0",
-        "symfony/process": "^4.0 || ^5.0",
+        "symfony/process": "^5.4",
         "php": "^7.2"
     },
     "require-dev": {
