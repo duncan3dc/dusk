@@ -5,6 +5,14 @@ Changelog
 
 --------
 
+## 1.1.1 - 2022-04-14
+
+### Changed
+
+* [Laravel] Ensure this library can be installed alongside Laravel 9 ([#17](https://github.com/duncan3dc/dusk/pull/17)).
+
+--------
+
 ## 1.1.0 - 2022-02-13
 
 ### Changed
