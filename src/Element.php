@@ -57,10 +57,11 @@ class Element
     /**
      * Convert a standard element to one of our bespoke elements.
      *
-     * @param mixed $element The element to convert
+     * @template T of mixed
+     * @param T $element The element to convert
      * @param RemoteWebDriver $driver The driver that contains this element
      *
-     * @return mixed
+     * @return (T is RemoteWebElement ? self : T)
      */
     public static function convertElement($element, RemoteWebDriver $driver)
     {

@@ -1,5 +1,6 @@
 parameters:
 	ignoreErrors:
+		- '/^Property duncan3dc\\Laravel\\Dusk::\$driver is never read, only written\.$/'
 		- '/^Parameter #2 .* of static method .*\\RemoteWebDriver::create\(\) expects .*, .*\\WebDriverCapabilities given\.$/'
 		- '/^Parameter #1 .* of class .*\\ElementResolver constructor expects .*\\RemoteWebDriver, .*\\RemoteWebElement given\.$/'
 		- '/^Method duncan3dc\\Laravel\\Element::elements\(\) should return array.* but returns array.*\.$/'

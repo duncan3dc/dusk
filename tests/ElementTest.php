@@ -37,7 +37,7 @@ class ElementTest extends TestCase
 
 
     /**
-     * @return iterable<array>
+     * @return iterable<array<mixed>>
      */
     public function elementProvider(): iterable
     {
@@ -107,7 +107,7 @@ class ElementTest extends TestCase
 
 
     /**
-     * @return iterable<array>
+     * @return iterable<array<string>>
      */
     public function parentProvider(): iterable
     {

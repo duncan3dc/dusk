@@ -98,7 +98,7 @@ class DuskTest extends TestCase
 
 
     /**
-     * @return iterable<array>
+     * @return iterable<array<string>>
      */
     public function baseUrlProvider(): iterable
     {
