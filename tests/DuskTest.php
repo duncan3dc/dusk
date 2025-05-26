@@ -100,7 +100,7 @@ class DuskTest extends TestCase
     /**
      * @return iterable<array<string>>
      */
-    public function baseUrlProvider(): iterable
+    public static function baseUrlProvider(): iterable
     {
         $data = [
             "/sub/dir/"             =>  "http://example.com/sub/dir/",
