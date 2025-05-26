@@ -16,9 +16,9 @@ class ChromeProcess extends \Laravel\Dusk\Chrome\ChromeProcess
     /**
      * Create a new instance.
      *
-     * @param int $port The port to run on
+     * @param int|null $port The port to run on
      */
-    public function __construct(int $port = null)
+    public function __construct(?int $port = null)
     {
         parent::__construct();
         $this->port = $port ?: 9515;

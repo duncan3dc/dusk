@@ -168,11 +168,11 @@ class Element
     /**
      * Click the element at the given selector (or this element).
      *
-     * @param string $selector
+     * @param string|null $selector
      *
      * @return $this
      */
-    public function click(string $selector = null): Element
+    public function click(?string $selector = null): Element
     {
         if ($selector === null) {
             $element = $this->remote;
@@ -189,11 +189,11 @@ class Element
     /**
      * Move the mouse over the given selector (or this element).
      *
-     * @param string $selector
+     * @param string|null $selector
      *
      * @return $this
      */
-    public function mouseover(string $selector = null): Element
+    public function mouseover(?string $selector = null): Element
     {
         if ($selector === null) {
             $element = $this->remote;

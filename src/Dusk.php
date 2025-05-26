@@ -30,9 +30,9 @@ class Dusk
     /**
      * Create a new instance.
      *
-     * @param DriverInterface $driver The browser driver to use
+     * @param DriverInterface|null $driver The browser driver to use
      */
-    public function __construct(DriverInterface $driver = null)
+    public function __construct(?DriverInterface $driver = null)
     {
         if ($driver === null) {
             $driver =  new Chrome();
